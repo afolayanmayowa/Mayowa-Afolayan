@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayowa Afolayan - Professional Portfolio</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; object-src 'none';">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Content Sections */
+        .section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .experience-item h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .company {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .achievements {
+            list-style: none;
+            padding: 0;
+        }
+
+        .achievements li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .achievements li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(102, 126, 234, 0.05);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-top: 4px solid #667eea;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item h4 {
+            color: #667eea;
+            margin: 1rem 0 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Publications */
+        .publication-item {
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .publication-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .nav {
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Success indicator */
+        .success-banner {
+            background: #28a745;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-banner">
+            🎉 SUCCESS! Your portfolio is now loading correctly!
+        </div>
+        
+        <header class="header">
+            <div class="profile-img">MA</div>
+            <h1>Mayowa Afolayan</h1>
+            <p class="subtitle">Production Manager | Food Technologist | Sustainability Expert</p>
+            <p class="description">
+                Agri-food technologist with 15+ years of experience driving operational excellence, 
+                continuous improvement, and sustainability across the food industry value chain.
+            </p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/mayowa-afolayan/" class="social-link" target="_blank">
+                    🔗 LinkedIn
+                </a>
+                <a href="mailto:afolayanmayowa@yahoo.com" class="social-link">
+                    ✉️ Email
+                </a>
+                <a href="#" class="social-link" onclick="handleCVDownload()">
+                    📄 Download CV
+                </a>
+            </div>
+        </header>
+
+        <nav class="nav">
+            <button class="nav-btn active" onclick="showSection('about')">About</button>
+            <button class="nav-btn" onclick="showSection('experience')">Experience</button>
+            <button class="nav-btn" onclick="showSection('skills')">Skills</button>
+            <button class="nav-btn" onclick="showSection('publications')">Publications</button>
+            <button class="nav-btn" onclick="showSection('contact')">Contact</button>
+        </nav>
+
+        <main>
+            <section id="about" class="section active">
+                <h2>About Me</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    I am a dedicated agri-food technologist and supply chain professional with over 15 years 
+                    of comprehensive experience spanning food product development, research and development, 
+                    food safety, quality assurance, process management, production management, and supply chain management.
+                </p>
+                
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    My expertise lies in leading cross-functional teams to enhance efficiency, drive operational 
+                    excellence, and implement sustainable practices across the entire business value chain. I am 
+                    passionate about innovation in the food industry, particularly in areas of waste valorisation, 
+                    circular bioeconomy, and novel food development.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                    <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎓</div>
+                        <h4>Education</h4>
+                        <p>Master's in Agri-Food Technology & MBA</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">💼</div>
+                        <h4>Experience</h4>
+                        <p>15+ Years in Food Industry</p>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏆</div>
+                        <h4>Certifications</h4>
+                        <p>Six Sigma, HACCP, IOSH</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="experience" class="section">
+                <h2>Professional Experience</h2>
+                
+                <div class="experience-item">
+                    <h3>Brewing Shift Manager</h3>
+                    <div class="company">Heineken Company</div>
+                    <div class="date">March 2025 - Present</div>
+                    <ul class="achievements">
+                        <li>Managing team of process technicians and technical operators to enhance operational excellence</li>
+                        <li>Reduced unresolved process deviations/tags by 50% through effective problem-solving</li>
+                        <li>Achieved skill matrix uplift from 65% to 80% through coaching and development</li>
+                        <li>Facilitated kaizen and improvement teams using problem-solving tools</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Novel Food Product and Process Innovation Technologist</h3>
+                    <div class="company">University of Lincoln / Warden Agri Limited</div>
+                    <div class="date">May 2023 - January 2025</div>
+                    <ul class="achievements">
+                        <li>Spearheaded development of two new products and novel food additive (20% portfolio increase)</li>
+                        <li>Implemented novel manufacturing techniques reducing waste by 15%</li>
+                        <li>Developed framework for scaling up food waste valorisation</li>
+                        <li>Ensured compliance with product safety and regulatory standards</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Shift Manager Logistics</h3>
+                    <div class="company">Nigerian Breweries Plc</div>
+                    <div class="date">April - October 2021</div>
+                    <ul class="achievements">
+                        <li>Managed team of 2 supervisors and 12 logistics associates</li>
+                        <li>Reduced truck residency time by 54% through process optimization</li>
+                        <li>Improved inventory tracking by 25% and reduced lead time by 20%</li>
+                        <li>Collaborated across production, operations, and sales teams</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <h2>Core Competencies</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>⚙️ Technical Skills</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Food Technology</span>
+                            <span class="skill-tag">Process Innovation</span>
+                            <span class="skill-tag">Brewing Technology</span>
+                            <span class="skill-tag">Quality Management</span>
+                            <span class="skill-tag">Food Safety</span>
+                            <span class="skill-tag">HACCP</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>👥 Leadership & Management</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Production Management</span>
+                            <span class="skill-tag">People Management</span>
+                            <span class="skill-tag">Project Management</span>
+                            <span class="skill-tag">Supply Chain Management</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>🌱 Sustainability</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Circular Bioeconomy</span>
+                            <span class="skill-tag">Waste Valorisation</span>
+                            <span class="skill-tag">Environmental Management</span>
+                            <span class="skill-tag">Product Development</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>📊 Data & Analysis</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Analysis</span>
+                            <span class="skill-tag">SAP-ERP</span>
+                            <span class="skill-tag">Six Sigma Green Belt</span>
+                            <span class="skill-tag">Process Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="publications" class="section">
+                <h2>Publications & Research</h2>
+                
+                <div class="publication-item">
+                    <h3>A Review of Avocado Waste Valorization and Integrated Biorefinery System</h3>
+                    <p style="color: #666; font-style: italic; margin-bottom: 1rem;">Published Research</p>
+                    <p>Comprehensive review exploring innovative approaches to transforming avocado waste into valuable products through integrated biorefinery systems, contributing to circular economy principles in the food industry.</p>
+                </div>
+
+                <div class="publication-item">
+                    <h3>Novel Foods – Problem with labeling, testing, and technology for processing</h3>
+                    <p style="color: #666; font-style: italic; margin-bottom: 1rem;">Current Research Project</p>
+                    <p>Ongoing research investigating complexities surrounding novel food regulation, focusing on labeling requirements, safety testing protocols, and innovative processing technologies for market approval.</p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: #333;">Research Interests</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">♻️</div>
+                            <h4>Waste Valorisation</h4>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🧪</div>
+                            <h4>Novel Foods</h4>
+                        </div>
+                        <div style="text-align: center; padding: 1rem; background: rgba(102, 126, 234, 0.05); border-radius: 10px;">
+                            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌿</div>
+                            <h4>Circular Bioeconomy</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2>Contact Information</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666; font-size: 1.1rem;">
+                    I'm always interested in discussing opportunities in food technology, sustainability, and operational excellence.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div style="font-size: 2rem; color: #667eea;">✉️</div>
+                        <h4>Email</h4>
+                        <p><a href="mailto:afolayanmayowa@yahoo.com">afolayanmayowa@yahoo.com</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div style="font-size: 2rem; color: #667eea;">📱</div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:+447576949810">(+44) 07576949810</a></p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div style="font-size: 2rem; color: #667eea;">📍</div>
+                        <h4>Location</h4>
+                        <p>Scunthorpe, Lincolnshire<br>United Kingdom</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div style="font-size: 2rem; color: #667eea;">🔗</div>
+                        <h4>LinkedIn</h4>
+                        <p><a href="https://www.linkedin.com/in/mayowa-afolayan/" target="_blank">Connect with me</a></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Simple, extension-safe JavaScript
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update active nav button
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleCVDownload() {
+            alert('CV download functionality ready! Upload your CV PDF file to GitHub and link it here.');
+            // Example implementation:
+            // const link = document.createElement('a');
+            // link.href = './Mayowa_Afolayan_CV.pdf';
+            // link.download = 'Mayowa_Afolayan_CV.pdf';
+            // link.click();
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Portfolio loaded successfully!');
+        });
+    </script>
+</body>
+</html>
